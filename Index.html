@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultra-clean & Hyper-fast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent-color: #0066FF;
+            --text-color: #1a1a1a;
+            --bg-color: #ffffff;
+            --light-gray: #f8f9fa;
+            --gray: #e9ecef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .headline-xxl {
+            font-size: clamp(140px, 20vw, 220px);
+            font-weight: 900;
+            line-height: 0.85;
+            letter-spacing: -0.02em;
+        }
+        
+        .headline-xl {
+            font-size: clamp(80px, 10vw, 120px);
+            font-weight: 800;
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+        }
+        
+        .headline-lg {
+            font-size: clamp(48px, 6vw, 64px);
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -0.01em;
+        }
+        
+        .headline-md {
+            font-size: clamp(32px, 4vw, 40px);
+            font-weight: 700;
+            line-height: 1.1;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 60px 0;
+        }
+        
+        .bento-card {
+            background-color: var(--light-gray);
+            border-radius: 16px;
+            padding: 40px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .bento-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, var(--accent-color), #0099FF);
+            color: white;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: clamp(48px, 6vw, 64px);
+            font-weight: 800;
+            line-height: 1;
+        }
+        
+        .case-study-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px 24px;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        .lighthouse-score {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .score-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-gray);
+            font-weight: 700;
+        }
+        
+        .score-value {
+            font-size: 28px;
+            line-height: 1;
+        }
+        
+        .score-label {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+        
+        .accent-color {
+            color: var(--accent-color);
+        }
+        
+        .accent-bg {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mb-1 { margin-bottom: 8px; }
+        .mb-2 { margin-bottom: 16px; }
+        .mb-3 { margin-bottom: 24px; }
+        .mb-4 { margin-bottom: 32px; }
+        .mb-5 { margin-bottom: 40px; }
+        
+        .mt-1 { margin-top: 8px; }
+        .mt-2 { margin-top: 16px; }
+        .mt-3 { margin-top: 24px; }
+        .mt-4 { margin-top: 32px; }
+        .mt-5 { margin-top: 40px; }
+        
+        .py-2 { padding-top: 16px; padding-bottom: 16px; }
+        .py-3 { padding-top: 24px; padding-bottom: 24px; }
+        .py-4 { padding-top: 32px; padding-bottom: 32px; }
+        .py-5 { padding-top: 40px; padding-bottom: 40px; }
+        
+        .px-2 { padding-left: 16px; padding-right: 16px; }
+        .px-3 { padding-left: 24px; padding-right: 24px; }
+        .px-4 { padding-left: 32px; padding-right: 32px; }
+        .px-5 { padding-left: 40px; padding-right: 40px; }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .headline-xxl {
+                font-size: clamp(100px, 25vw, 180px);
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .case-study-section {
+                padding: 60px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="container">
+        <nav class="nav">
+            <div class="headline-md">UCHF</div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#case-studies" class="nav-link">Case Studies</a>
+                <a href="#bento" class="nav-link">Capabilities</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="container py-5">
+            <div class="fade-in">
+                <h1 class="headline-xxl mb-3">
+                    ULTRA-<span class="accent-color">CLEAN</span>
+                </h1>
+                <h1 class="headline-xxl mb-4">
+                    & HYPER-<span class="accent-color">FAST</span>
+                </h1>
+                
+                <p class="headline-lg mb-4">
+                    Performance that changes everything.
+                </p>
+                
+                <p class="mb-4" style="font-size: 20px; max-width: 800px;">
+                    We build exceptionally fast and efficient web solutions for product companies, team leads, and CTOs who value speed, clean code, and measurable results.
+                </p>
+                
+                <a href="#case-studies" class="btn">View Case Studies</a>
+            </div>
+        </section>
+
+        <section id="bento" class="container py-4">
+            <h2 class="headline-xl mb-5 text-center">Capabilities</h2>
+            
+            <div class="bento-grid">
+                <div class="bento-card fade-in">
+                    <h3 class="headline-md mb-3 accent-color">About</h3>
+                    <p class="mb-3">
+                        We specialize in creating ultra-fast web applications with a focus on performance and user experience.
+                    </p>
+                    <p>
+                        Our approach: minimalism in design, maximalism in speed.
+                    </p>
+                </div>
+                
+                <div class="bento-card fade-in">
+                    <h3 class="headline-md mb-3 accent-color">Skills</h3>
+                    <ul style="list-style-position: inside;">
+                        <li class="mb-2">Astro + Static Generation</li>
+                        <li class="mb-2">Web Performance Optimization</li>
+                        <li class="mb-2">Core Web Vitals 99+</li>
+                        <li class="mb-2">Zero JS Runtime</li>
+                        <li>Bare-metal optimization</li>
+                    </ul>
+                </div>
+                
+                <div class="bento-card fade-in">
+                    <h3 class="headline-md mb-3 accent-color">Featured</h3>
+                    <p class="mb-3">
+                        Latest project: 
+                        <strong>E-commerce platform</strong>
+                    </p>
+                    <div class="metric-card">
+                        <div class="metric-value">0.8s</div>
+                        <p>LCP (Largest Contentful Paint)</p>
+                    </div>
+                </div>
+                
+                <div class="bento-card fade-in">
+                    <h3 class="headline-md mb-3 accent-color">Contact</h3>
+                    <p class="mb-3">
+                        Ready to speed up your product?
+                    </p>
+                    <p class="mb-3">
+                        <strong>Email:</strong> hello@ultraclean.dev
+                    </p>
+                    <a href="#contact" class="btn">Contact Us</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="case-studies" class="py-4">
+            <div class="container">
+                <h2 class="headline-xl mb-5 text-center">Case Studies</h2>
+                <p class="text-center mb-5" style="font-size: 20px; max-width: 800px; margin: 0 auto;">
+                    Real performance optimization metrics before and after
+                </p>
+            </div>
+            
+            <div class="case-study-section">
+                <div class="container">
+                    <div class="fade-in">
+                        <h3 class="headline-lg mb-4 accent-color">E-commerce Platform</h3>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-bottom: 40px;">
+                            <div class="metric-card">
+                                <div class="metric-value">+42%</div>
+                                <p>Conversion</p>
+                            </div>
+                            
+                            <div class="metric-card">
+                                <div class="metric-value">-68%</div>
+                                <p>Bounce Rate</p>
+                            </div>
+                            
+                            <div class="metric-card">
+                                <div class="metric-value">0.8s</div>
+                                <p>LCP</p>
+                            </div>
+                        </div>
+                        
+                        <div style="max-width: 800px;">
+                            <h4 class="headline-md mb-3">Before optimization:</h4>
+                            <ul class="mb-4" style="list-style-position: inside;">
+                                <li class="mb-2">LCP: 3.2s (slow)</li>
+                                <li class="mb-2">Conversion: 1.8%</li>
+                                <li class="mb-2">Bounce Rate: 72%</li>
+                                <li class="mb-2">JS bundle: 1.4MB</li>
+                            </ul>
+                            
+                            <h4 class="headline-md mb-3">After optimization:</h4>
+                            <ul style="list-style-position: inside;">
+                                <li class="mb-2">LCP: 0.8s (fast)</li>
+                                <li class="mb-2">Conversion: 2.56% (+42%)</li>
+                                <li class="mb-2">Bounce Rate: 23% (-68%)</li>
+                                <li class="mb-2">JS bundle: 14KB (-99%)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="case-study-section">
+                <div class="container">
+                    <div class="fade-in">
+                        <h3 class="headline-lg mb-4 accent-color">SaaS for Development Teams</h3>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-bottom: 40px;">
+                            <div class="metric-card">
+                                <div class="metric-value">+28%</div>
+                                <p>User Retention</p>
+                            </div>
+                            
+                            <div class="metric-card">
+                                <div class="metric-value">1.1s</div>
+                                <p>FCP</p>
+                            </div>
+                            
+                            <div class="metric-card">
+                                <div class="metric-value">95</div>
+                                <p>Google PageSpeed</p>
+                            </div>
+                        </div>
+                        
+                        <div style="max-width: 800px;">
+                            <h4 class="headline-md mb-3">Problem:</h4>
+                            <p class="mb-4">
+                                Complex React application with heavy client-side rendering. Initial load took 6+ seconds on mobile devices, causing 65% potential user loss during onboarding.
+                            </p>
+                            
+                            <h4 class="headline-md mb-3">Solution:</h4>
+                            <p>
+                                Migration to Astro with Island Architecture, critical CSS inlining, static generation of marketing pages, lazy-loading for non-essential components.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="container py-5">
+            <div class="fade-in">
+                <h2 class="headline-xl mb-4 text-center">Contact Us</h2>
+                <p class="text-center mb-5" style="font-size: 20px; max-width: 600px; margin: 0 auto;">
+                    Ready to achieve 99+ Lighthouse scores and accelerate your product?
+                </p>
+                
+                <div style="max-width: 500px; margin: 0 auto;">
+                    <form id="contact-form" style="display: flex; flex-direction: column; gap: 20px;">
+                        <div>
+                            <label for="name" style="display: block; margin-bottom: 8px; font-weight: 500;">Name</label>
+                            <input type="text" id="name" style="width: 100%; padding: 12px 16px; border: 1px solid var(--gray); border-radius: 8px; font-family: inherit; font-size: 16px;">
+                        </div>
+                        
+                        <div>
+                            <label for="email" style="display: block; margin-bottom: 8px; font-weight: 500;">Email</label>
+                            <input type="email" id="email" style="width: 100%; padding: 12px 16px; border: 1px solid var(--gray); border-radius: 8px; font-family: inherit; font-size: 16px;">
+                        </div>
+                        
+                        <div>
+                            <label for="message" style="display: block; margin-bottom: 8px; font-weight: 500;">Message</label>
+                            <textarea id="message" rows="4" style="width: 100%; padding: 12px 16px; border: 1px solid var(--gray); border-radius: 8px; font-family: inherit; font-size: 16px;"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn" style="align-self: flex-start;">Send</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background-color: var(--light-gray); padding: 60px 0;">
+        <div class="container">
+            <h3 class="headline-lg mb-5 text-center">Our Performance</h3>
+            
+            <div class="lighthouse-score mb-5">
+                <div class="score-circle accent-bg">
+                    <div class="score-value">100</div>
+                    <div class="score-label">PERFORMANCE</div>
+                </div>
+                
+                <div class="score-circle accent-bg">
+                    <div class="score-value">100</div>
+                    <div class="score-label">ACCESSIBILITY</div>
+                </div>
+                
+                <div class="score-circle accent-bg">
+                    <div class="score-value">100</div>
+                    <div class="score-label">BEST PRACTICES</div>
+                </div>
+                
+                <div class="score-circle accent-bg">
+                    <div class="score-value">100</div>
+                    <div class="score-label">SEO</div>
+                </div>
+            </div>
+            
+            <p class="text-center mb-3">
+                All our projects achieve 99-100 Lighthouse scores.
+            </p>
+            
+            <p class="text-center">
+                Static Generation • Zero JS in production • Core Web Vitals 99+
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Form data is not sent on this static site. In a real Astro project, this would work via an API route.');
+                });
+            }
+        });
+    </script>
+</body>
+  </html>
